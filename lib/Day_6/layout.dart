@@ -120,7 +120,7 @@ class Layout extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      margin: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.all(10),
                       padding: const EdgeInsets.all(40),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -146,6 +146,7 @@ class Layout extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.all(20),
