@@ -5,8 +5,38 @@ class liste extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> cars = [
+      {
+        "name": "Alphard",
+        "price": "Rp 800.000 / 24 Jam",
+        "image": "assets/images/alphard.jpg",
+      },
+      {
+        "name": "Fortuner",
+        "price": "Rp 600.000 / 24 Jam",
+        "image": "assets/images/fortuner.jpg",
+      },
+      {
+        "name": "Innova Reborn",
+        "price": "Rp 450.000 / 24 Jam",
+        "image": "assets/images/inova.jpg",
+      },
+      {
+        "name": "Honda Raize",
+        "price": "Rp 400.000 / 24 Jam",
+        "image": "assets/images/raize.jpg",
+      },
+      {
+        "name": "New Avanza",
+        "price": "Rp 375.000 / 24 Jam",
+        "image": "assets/images/avanza.jpg",
+      },
+    ];
     return Scaffold(
-      appBar: AppBar(title: Text("YadCar"), centerTitle: true),
+      appBar: AppBar(
+        title: Text("YadCar", style: TextStyle(fontFamily: 'Anton')),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -21,6 +51,14 @@ class liste extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  Text(
+                    "Data Penyewa",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      // fontFamily: 'Anton',
+                    ),
+                  ),
+                  SizedBox(height: 12),
                   TextField(
                     decoration: InputDecoration(
                       labelText: "Nama",
@@ -104,35 +142,35 @@ class liste extends StatelessWidget {
 
             // PRODUK LIST
             Text(
-              "Produk Tersedia",
+              "Mobil Tersedia",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 12),
 
-            ListTile(
-              leading: Image.asset("assets/images/alphard.jpg"),
-              title: Text("Alphard"),
-              subtitle: Text("Rp 800.000 / 24 Jam"),
-            ),
-            ListTile(
-              leading: Image.asset("assets/images/fortuner.jpg"),
-              title: Text("Fortuner"),
-              subtitle: Text("Rp 600.000 / 24 Jam"),
-            ),
-            ListTile(
-              leading: Image.asset("assets/images/inova.jpg"),
-              title: Text("Innova Reborn"),
-              subtitle: Text("Rp 450.000 / 24 Jam"),
-            ),
-            ListTile(
-              leading: Image.asset("assets/images/raize.jpg"),
-              title: Text("Honda Raize"),
-              subtitle: Text("Rp 400.000 / 24 Jam"),
-            ),
-            ListTile(
-              leading: Image.asset("assets/images/avanza.jpg"),
-              title: Text("New Avanza"),
-              subtitle: Text("Rp 375.000 / 24 Jam"),
+            ListView.builder(
+              itemCount: cars.length,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final car = cars[index];
+                return ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      car['image']!,
+                      width: 90,
+                      height: 80,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  title: Text(
+                    car['name']!,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(car['price']!),
+                  contentPadding: EdgeInsets.symmetric(vertical: 4),
+                );
+              },
             ),
           ],
         ),
