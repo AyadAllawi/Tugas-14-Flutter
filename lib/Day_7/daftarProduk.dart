@@ -52,6 +52,9 @@ class liste extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
+
+
+                    
                     "Data Penyewa",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -97,47 +100,11 @@ class liste extends StatelessWidget {
             ),
 
             SizedBox(height: 24),
-
-            // GALERI
             Text(
               "Pilihan Mobil",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            // SizedBox(height: 12),
-            // GridView.count(
-            //   crossAxisCount: 3,
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   crossAxisSpacing: 8,
-            //   mainAxisSpacing: 8,
-            //   children: List.generate(6, (index) {
-            //     return Stack(
-            //       children: [
-            //         Container(
-            //           decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(10),
-            //             image: DecorationImage(
-            //               image: AssetImage('assets/im/foto${index + 1}.jpg'),
-            //               fit: BoxFit.cover,
-            //             ),
-            //           ),
-            //         ),
-            //         // Positioned(
-            //         //   bottom: 8,
-            //         //   left: 8,
-            //         //   child: Text(
-            //         //     'Gambar ${index + 1}',
-            //         //     style: TextStyle(
-            //         //       color: const Color.fromARGB(255, 248, 248, 248),
-            //         //       fontWeight: FontWeight.bold,
-            //         //       shadows: [Shadow(color: Colors.black, blurRadius: 2)],
-            //         //     ),
-            //         //   ),
-            //         // ),
-            //       ],
-            //     );
-            //   }),
-            // ),
+
             SizedBox(height: 24),
 
             // PRODUK LIST
