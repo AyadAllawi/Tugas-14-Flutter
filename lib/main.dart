@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ppkd_batch_3/Day_6/layout.dart';
+import 'package:ppkd_batch_3/Day_7/daftarProduk.dart';
 import 'package:ppkd_batch_3/Day_7/grid.dart';
 // import 'package:ppkd_batch_3/start.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Grid(),
+      home: liste(),
     );
   }
 }
