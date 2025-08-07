@@ -11,6 +11,8 @@ class _InteractionState extends State<Interaction> {
   bool showName = true;
   bool liked = true;
   bool tampil = true;
+  bool showBox = true;
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +95,92 @@ class _InteractionState extends State<Interaction> {
                       ),
                     ),
                 ],
+              ),
+            ),
+
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsetsGeometry.all(16),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          count++;
+                        });
+                      },
+                      child: Text("Tambah"),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(count.toString(), style: TextStyle(fontSize: 60)),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        setState(() {});
+                        count--;
+                        print(count);
+                      },
+                      icon: Icon(Icons.minimize),
+                    ),
+
+                    SizedBox(width: 20),
+                  ],
+                ),
+                SizedBox(height: 30),
+
+                InkWell(
+                  onTap: () {
+                    print('Kotak Disentuh');
+                    setState(() {
+                      showBox = !showBox;
+                    });
+                  },
+
+                  child: Padding(
+                    padding: EdgeInsetsGeometry.symmetric(
+                      horizontal: 16,
+                      vertical: 4,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFFFFFF),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(child: Text("Kotak Hadiah")),
+                    ),
+                  ),
+                ),
+                if (showBox) Text("Hallo Apa Kabar!"),
+              ],
+            ),
+
+            SizedBox(height: 30),
+
+            GestureDetector(
+              onTap: () => print('Aku di tekan'),
+              onDoubleTap: () => print('hallo tekan'),
+              onLongPress: () => print('iyohhh'),
+
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(
+                  horizontal: 16,
+                  vertical: 4,
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF769820),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(child: Text("coba aku")),
+                ),
               ),
             ),
           ],
