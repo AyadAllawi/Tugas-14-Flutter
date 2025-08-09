@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:ppkd_batch_3/Day_12/draw.dart';
+import 'package:ppkd_batch_3/extension/navigation.dart';
 
-class login extends StatefulWidget {
-  const login({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<login> createState() => _loginState();
+  State<Login> createState() => _LoginState();
 }
 
-class _loginState extends State<login> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
@@ -258,7 +260,7 @@ class _loginState extends State<login> {
                                 TextButton(
                                   child: Text("DONE"),
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    context.push(DrawerApp());
                                   },
                                 ),
                               ],
@@ -324,7 +326,7 @@ class _loginState extends State<login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/google_icon.jpg',
+                          'assets/images/foto/google_icon.jpg',
                           width: 20,
                           height: 20,
                         ),

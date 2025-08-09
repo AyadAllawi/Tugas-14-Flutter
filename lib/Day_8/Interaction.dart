@@ -129,10 +129,10 @@ class _InteractionState extends State<Interaction> {
                       icon: Icon(Icons.minimize),
                     ),
 
-                    SizedBox(width: 20),
+                    SizedBox(width: 10),
                   ],
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 10),
 
                 InkWell(
                   onTap: () {
@@ -161,7 +161,7 @@ class _InteractionState extends State<Interaction> {
               ],
             ),
 
-            SizedBox(height: 30),
+            SizedBox(height: 10),
 
             GestureDetector(
               onTap: () => print('Aku di tekan'),

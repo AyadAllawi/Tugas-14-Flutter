@@ -52,9 +52,6 @@ class liste extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-
-
-                    
                     "Data Penyewa",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
