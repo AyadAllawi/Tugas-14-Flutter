@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ppkd_batch_3/Day_12/draw.dart';
 
-class Cekbox extends StatefulWidget {
-  const Cekbox({super.key});
+class Date extends StatefulWidget {
+  const Date({super.key});
 
   @override
-  State<Cekbox> createState() => _CekboxState();
+  State<Date> createState() => _DateState();
 }
 
-class _CekboxState extends State<Cekbox> {
-  bool isCheck = false;
-  bool isCheckSwitch = false;
+class _DateState extends State<Date> {
   String selectedPage = '';
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("CheckBox", style: TextStyle(fontFamily: 'Poppins')),
-        centerTitle: false,
-      ),
+      appBar: AppBar(title: Text("Date")),
+      drawer: const MyDrawer(),
 
       // drawer: Drawer(
       //   child: ListView(
@@ -92,58 +91,52 @@ class _CekboxState extends State<Cekbox> {
       //     ],
       //   ),
       // ),
-      drawer: MyDrawer(),
-
-      body: Column(
-        children: [
-          // Checkbox
-          Text(
-            "Syarat & Ketentuan",
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-
-          SizedBox(height: 20),
-
-          // Spacer(),
-          Text(
-            "LorepLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            style: TextStyle(fontFamily: 'Poppins', fontSize: 12),
-          ),
-
-          Spacer(),
-          Text(
-            "Saya menyetujui semua persyaratan yang berlaku.",
-            style: TextStyle(fontFamily: 'Poppins', fontSize: 13),
-          ),
-
-          Row(
-            children: [
-              Checkbox(
-                activeColor: Colors.blue,
-                value: isCheck,
-                onChanged: (value) {
+      body: Padding(
+        padding: EdgeInsetsGeometry.all(100),
+        child: Column(
+          children: [
+            Text("Tanggal Lahir"),
+            ElevatedButton(
+              child: const Text("Pilih Tanggal Lahir"),
+              onPressed: () async {
+                final DateTime? pickerDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1920),
+                  lastDate: DateTime(2100),
+                );
+                if (pickerDate != null) {
                   setState(() {
-                    isCheck = value!;
+                    selectedDate = pickerDate;
                   });
-                },
-              ),
-              Text(
-                isCheck
-                    ? "Lanjutkan pendaftaran diperbolehkan"
-                    : "Anda belum bisa melanjutkan",
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          Spacer(),
-        ],
+                }
+              },
+            ),
+            // Text(
+            //   selectedDate == null
+            //       ? "Pilih tanggal dulu"
+            //       : DateFormat('EEEE', "id_ID").format(selectedDate!),
+            // ),
+            // Text(
+            //   selectedDate == null
+            //       ? "Pilih tanggal dulu"
+            //       : DateFormat('yyyy').format(selectedDate!),
+            // ),
+            // Text(
+            //   selectedDate == null
+            //       ? "Pilih tanggal dulu"
+            //       : DateFormat('MMM').format(selectedDate!),
+            // ),
+            Text(
+              selectedDate == null
+                  ? "Pilih tanggal dulu"
+                  : DateFormat(
+                      'EEEE, dd MMMM yyyy',
+                      "id_ID",
+                    ).format(selectedDate!),
+            ),
+          ],
+        ),
       ),
     );
   }

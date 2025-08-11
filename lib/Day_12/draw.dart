@@ -1,103 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:ppkd_batch_3/Day_12/checkbox.dart';
+import 'package:ppkd_batch_3/Day_12/date.dart';
+import 'package:ppkd_batch_3/Day_12/dropdown.dart';
 import 'package:ppkd_batch_3/Day_12/switch.dart';
+import 'package:ppkd_batch_3/Day_12/time.dart';
 
-// / Flutter code sample for [Drawer].
-
-void main() => runApp(const DrawerApp());
-
-class DrawerApp extends StatelessWidget {
-  const DrawerApp({super.key});
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Draw());
-  }
-}
-
-class Draw extends StatefulWidget {
-  const Draw({super.key});
-
-  @override
-  State<Draw> createState() => _DrawState();
-}
-
-class _DrawState extends State<Draw> {
-  String selectedPage = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Tugas 7 Flutter')),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 114, 127, 138),
-              ),
-              child: Text(
-                'Dashboard',
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 114, 127, 138),
             ),
-            ListTile(
-              leading: const Icon(Icons.check_box),
-              title: const Text(
-                'CheckBox',
-                style: TextStyle(fontFamily: 'Poppins'),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Cekbox()),
-                );
-              },
+            child: Text(
+              'Dashboard',
+              style: TextStyle(color: Colors.white, fontSize: 24),
             ),
-            ListTile(
-              leading: const Icon(Icons.brightness_6),
-              title: const Text('Switch'),
-              onTap: () {
-                {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Tukar()),
-                  );
-                }
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.arrow_drop_down),
-              title: const Text('Dropdown'),
-              onTap: () {
-                setState(() {
-                  selectedPage = 'Dropdown';
-                });
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.date_range),
-              title: const Text('Tanggal'),
-              onTap: () {
-                setState(() {
-                  selectedPage = 'Tanggal';
-                });
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.punch_clock),
-              title: const Text('Jam'),
-              onTap: () {
-                setState(() {
-                  selectedPage = 'Jam';
-                });
-              },
-            ),
-          ],
-        ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.account_box),
+            title: const Text('CheckBox'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Cekbox()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.switch_access_shortcut),
+            title: const Text('Switch'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Tukar()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.arrow_drop_down),
+            title: const Text('DropDown'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Dorp()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.date_range),
+            title: const Text('Date'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Date()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.timelapse),
+            title: const Text('Time'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Time()),
+              );
+            },
+          ),
+        ],
       ),
-      body: Center(child: Text('Page: $selectedPage')),
     );
   }
 }

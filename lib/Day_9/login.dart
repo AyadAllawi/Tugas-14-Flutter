@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:ppkd_batch_3/Day_12/draw.dart';
+import 'package:ppkd_batch_3/Day_12/bottnav.dart';
 import 'package:ppkd_batch_3/extension/navigation.dart';
 
 class Login extends StatefulWidget {
@@ -260,7 +260,7 @@ class _LoginState extends State<Login> {
                                 TextButton(
                                   child: Text("DONE"),
                                   onPressed: () {
-                                    context.push(DrawerApp());
+                                    context.push(BotNav1());
                                   },
                                 ),
                               ],
