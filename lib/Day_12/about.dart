@@ -72,7 +72,11 @@ class About extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
+<<<<<<< HEAD
                   " by Ayad Allawi",
+=======
+                  "Made by Muhammad Sahrul Hakim",
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
                   style: TextStyle(
                     fontFamily: "Poppins",
                     fontSize: 14,

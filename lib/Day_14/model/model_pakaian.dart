@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -25,4 +26,19 @@ class ProdukModel {
 
   factory ProdukModel.formJson(String source) =>
       ProdukModel.fromMap(json.decode(source) as Map<String, dynamic>);
+=======
+import 'package:flutter/material.dart';
+
+class PakaianWanita {
+  final String nama;
+  final String price;
+  final IconData icon;
+  PakaianWanita({required this.nama, required this.price, required this.icon});
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      // 'nama'
+    };
+  }
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
 }
