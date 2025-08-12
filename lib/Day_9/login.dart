@@ -23,11 +23,19 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFFFFFFF), Color(0xFFD9D9D9)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //     colors: [Color(0xFFFFFFFF), Color(0xFFD9D9D9)],
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //   ),
+        // ),
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/foto/login.jpg"),
+            fit: BoxFit.cover,
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
@@ -154,7 +162,7 @@ class _LoginState extends State<Login> {
                   ],
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 18),
 
                 // PASSWORD
                 Column(
@@ -169,7 +177,7 @@ class _LoginState extends State<Login> {
                         color: Color(0xFF888888),
                       ),
                     ),
-                    const SizedBox(height: 1),
+                    const SizedBox(height: 15),
                     TextFormField(
                       controller: _passwordController,
                       obscureText: _isObscure,

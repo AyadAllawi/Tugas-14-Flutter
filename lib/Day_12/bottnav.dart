@@ -99,7 +99,10 @@ class _BotNav1State extends State<BotNav1> {
               bottomBarItems: const [
                 BottomBarItem(
                   inActiveItem: Icon(Icons.home_filled, color: Colors.blueGrey),
-                  activeItem: Icon(Icons.home_filled, color: Colors.blueAccent),
+                  activeItem: Icon(
+                    Icons.home_filled,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
                   itemLabel: 'Dashboard',
                 ),
                 BottomBarItem(
@@ -109,7 +112,7 @@ class _BotNav1State extends State<BotNav1> {
                   ),
                   activeItem: Icon(
                     Icons.info_outline,
-                    color: Colors.blueAccent,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   itemLabel: 'About',
                 ),
