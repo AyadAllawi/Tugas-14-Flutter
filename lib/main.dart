@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ppkd_batch_3/start.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:ppkd_batch_3/Day_14/list_model.dart';
 
 void main() {
+  initializeDateFormatting("id_ID");
   runApp(const MyApp());
 }
 
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: StartWidget(),
+      home: ListModel(),
     );
   }
 }

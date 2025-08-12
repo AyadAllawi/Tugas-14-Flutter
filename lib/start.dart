@@ -16,8 +16,11 @@ class StartWidget extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(255, 5, 73, 151),
         actions: const [
-          Icon(Icons.favorite, color: Color.fromARGB(255, 255, 3, 3)),
-          Icon(Icons.message, color: Color.fromARGB(255, 255, 255, 255)),
+          Icon(
+            Icons.message,
+            size: 30,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
         ],
         centerTitle: true,
       ),
@@ -36,6 +39,7 @@ class StartWidget extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Icon(Icons.person, size: 35, color: Color.fromARGB(255, 0, 0, 0)),
           Text(
             "AYAD ALLAWI",
             style: TextStyle(
@@ -54,7 +58,7 @@ class StartWidget extends StatelessWidget {
                 Icons.location_on,
                 color: const Color.fromARGB(255, 4, 67, 240),
               ),
-              Text("DKI JAKARTA", style: TextStyle(fontFamily: "Monoton")),
+              Text("AYAD ALLAWI", style: TextStyle(fontFamily: "Monoton")),
             ],
           ),
 
