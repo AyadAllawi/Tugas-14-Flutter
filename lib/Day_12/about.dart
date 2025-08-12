@@ -7,72 +7,84 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("About")),
-
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsetsGeometry.symmetric(
-              horizontal: 50,
-              vertical: 100,
-            ),
-            child: Center(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage(
-                      "assets/images/foto/AyadAllawi.jpg",
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  Column(
-                    children: [
-                      Text(
-                        "Ayad Allawi",
-                        style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Ini adalah Aplikasi tentang apa dan bagaimana kita bisa berinteraksi dengan pengurus wilayah seperti RT, RW, dan Warga sekitar",
-                            style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.justify,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/foto/mount.jpg"),
+            fit: BoxFit.cover,
           ),
-          Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "Made by Muhammad Sahrul Hakim",
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+        ),
+
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(
+                horizontal: 50,
+                vertical: 100,
+              ),
+
+              child: Center(
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage(
+                        "assets/images/foto/AyadAllawi.jpg",
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Column(
+                      children: [
+                        Text(
+                          "Ayad Allawi",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Ini adalah Aplikasi tentang apa dan bagaimana kita bisa berinteraksi dengan pengurus wilayah seperti RT, RW, dan Warga sekitar",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              Spacer(),
-              Text("@ 2025 Bunge"),
-            ],
-          ),
-        ],
+            ),
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Made by Muhammad Sahrul Hakim",
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Spacer(),
+                Text("@ 2025 Bunge"),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

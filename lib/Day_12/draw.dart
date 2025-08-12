@@ -4,10 +4,18 @@ import 'package:ppkd_batch_3/Day_12/date.dart';
 import 'package:ppkd_batch_3/Day_12/dropdown.dart';
 import 'package:ppkd_batch_3/Day_12/switch.dart';
 import 'package:ppkd_batch_3/Day_12/time.dart';
+import 'package:ppkd_batch_3/Day_14/list_map.dart';
+import 'package:ppkd_batch_3/Day_14/list_string.dart';
+import 'package:ppkd_batch_3/Day_14/listbuild.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
 
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -70,6 +78,36 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const Time()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.list),
+            title: const Text('List String'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const ListString()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.list),
+            title: const Text('List Map'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Kategori()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.list),
+            title: const Text('List Build'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Day14List()),
               );
             },
           ),

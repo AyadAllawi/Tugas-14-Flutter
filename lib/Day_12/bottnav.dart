@@ -159,7 +159,10 @@ class Page1 extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const Halaman()),
+              MaterialPageRoute(
+                builder: (context) => const Halaman(),
+                // const MyDrawer(),
+              ),
             );
           },
           child: const Text(

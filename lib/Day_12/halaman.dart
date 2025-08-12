@@ -28,7 +28,11 @@ class _HalamanState extends State<Halaman> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(height: 200),
-              const Icon(Icons.dashboard, size: 80, color: Colors.blue),
+              const Icon(
+                Icons.dashboard,
+                size: 80,
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
               const SizedBox(height: 20),
               const Text(
                 "Selamat Datang di Dashboard!",
