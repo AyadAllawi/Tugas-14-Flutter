@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:ppkd_batch_3/Day_12/about.dart';
 import 'package:ppkd_batch_3/Day_12/halaman.dart';
 
 void main() {
@@ -52,10 +53,10 @@ class _BotNav1State extends State<BotNav1> {
     final List<Widget> bottomBarPages = [
       // Halaman
       const Halaman(),
-      const Page2(),
+      const About(),
       const Page3(),
-      const Page4(),
-      const Page5(),
+      // const Page4(),
+      // const Page5(),
     ];
     return Scaffold(
       body: PageView(
@@ -99,22 +100,32 @@ class _BotNav1State extends State<BotNav1> {
                 BottomBarItem(
                   inActiveItem: Icon(Icons.home_filled, color: Colors.blueGrey),
                   activeItem: Icon(Icons.home_filled, color: Colors.blueAccent),
-                  itemLabel: 'Page 1',
+                  itemLabel: 'Dashboard',
                 ),
                 BottomBarItem(
-                  inActiveItem: Icon(Icons.star, color: Colors.blueGrey),
-                  activeItem: Icon(Icons.star, color: Colors.blueAccent),
-                  itemLabel: 'Page 2',
+                  inActiveItem: Icon(
+                    Icons.info_outline,
+                    color: Colors.blueGrey,
+                  ),
+                  activeItem: Icon(
+                    Icons.info_outline,
+                    color: Colors.blueAccent,
+                  ),
+                  itemLabel: 'About',
                 ),
                 BottomBarItem(
                   inActiveItem: Icon(Icons.settings, color: Colors.blueGrey),
-                  activeItem: Icon(Icons.settings, color: Colors.pink),
-                  itemLabel: 'Page 3',
-                ),
-                BottomBarItem(
-                  inActiveItem: Icon(Icons.person, color: Colors.blueGrey),
-                  activeItem: Icon(Icons.person, color: Colors.yellow),
-                  itemLabel: 'Page 4',
+                  activeItem: Icon(
+                    Icons.settings,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
+                  itemLabel: 'Settings',
+                  // ),
+                  // BottomBarItem(
+                  //   inActiveItem: Icon(Icons.person, color: Colors.blueGrey),
+                  //   activeItem: Icon(Icons.person, color: Colors.yellow),
+                  //   itemLabel: 'Page 4',
+                  // ),
                 ),
               ],
               onTap: (index) {
@@ -165,7 +176,7 @@ class Page2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.green,
-      child: const Center(child: Text('Page 2')),
+      child: const Center(child: Text('About')),
     );
   }
 }
@@ -176,32 +187,32 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      color: const Color.fromARGB(255, 255, 255, 255),
       child: const Center(child: Text('Page 3')),
     );
   }
 }
 
-class Page4 extends StatelessWidget {
-  const Page4({super.key});
+// class Page4 extends StatelessWidget {
+//   const Page4({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: const Center(child: Text('Page 4')),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: Colors.blue,
+//       child: const Center(child: Text('Page 4')),
+//     );
+//   }
+// }
 
-class Page5 extends StatelessWidget {
-  const Page5({super.key});
+// class Page5 extends StatelessWidget {
+//   const Page5({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.lightGreenAccent,
-      child: const Center(child: Text('Page 5')),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: Colors.lightGreenAccent,
+//       child: const Center(child: Text('Page 5')),
+//     );
+//   }
+// }
