@@ -72,7 +72,7 @@ class _BotNav1State extends State<BotNav1> {
           ? AnimatedNotchBottomBar(
               /// Provide NotchBottomBarController
               notchBottomBarController: _controller,
-              color: Colors.white,
+              color: const Color.fromARGB(255, 39, 63, 75),
               showLabel: true,
               textOverflow: TextOverflow.visible,
               maxLine: 1,

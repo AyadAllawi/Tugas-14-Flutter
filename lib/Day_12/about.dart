@@ -67,24 +67,21 @@ class About extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-<<<<<<< HEAD
-                  " by Ayad Allawi",
-=======
-                  "Made by Muhammad Sahrul Hakim",
->>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
+                  "Made by Ayad Allawi",
                   style: TextStyle(
                     fontFamily: "Poppins",
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
+                    color: Colors.white,
                   ),
                 ),
                 Spacer(),
-                Text("@ 2025 Bunge"),
+                Text("@ 2025 Bunge", style: TextStyle(color: Colors.white)),
               ],
             ),
           ],

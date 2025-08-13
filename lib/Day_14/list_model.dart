@@ -27,9 +27,6 @@ class _ListModelState extends State<ListModel> {
       price: "Rp400.000",
       icon: Icons.accessibility, // mirip bentuk tank top
     ),
-    ProdukModel(name: "Sweater", price: "Rp250.000", icon: Icons.checkroom),
-    ProdukModel(name: "Rok", price: "Rp1.200.000", icon: Icons.checkroom),
-    ProdukModel(name: "Celana", price: "Rp1.800.000", icon: Icons.checkroom),
 
     ProdukModel(
       name: "Rok",
