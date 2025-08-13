@@ -39,7 +39,11 @@ class Layout extends StatelessWidget {
               const SizedBox(height: 30),
               const CircleAvatar(
                 radius: 70,
+<<<<<<< HEAD
+                backgroundImage: AssetImage('assets/images/avanza.jpg'),
+=======
                 backgroundImage: AssetImage('assets/images/ayad.jpg'),
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
               ),
               const SizedBox(height: 10),
               const Text(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+<<<<<<< HEAD
+import 'package:ppkd_batch_3/Day_14/list_model.dart';
+=======
 import 'package:ppkd_batch_3/Day_9/login.dart';
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
 
 void main() {
   initializeDateFormatting("id_ID");
@@ -33,7 +37,11 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+<<<<<<< HEAD
+      home: ListModel(),
+=======
       home: Login(),
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
     );
   }
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+import 'package:ppkd_batch_3/Day_12/chekbox.dart';
+=======
 import 'package:ppkd_batch_3/Day_12/checkbox.dart';
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
 
 class Halaman extends StatefulWidget {
   const Halaman({super.key});

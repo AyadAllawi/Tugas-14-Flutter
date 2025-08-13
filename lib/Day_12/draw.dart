@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+import 'package:ppkd_batch_3/Day_12/chekbox.dart';
+=======
 import 'package:ppkd_batch_3/Day_12/checkbox.dart';
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
 import 'package:ppkd_batch_3/Day_12/date.dart';
 import 'package:ppkd_batch_3/Day_12/dropdown.dart';
 import 'package:ppkd_batch_3/Day_12/switch.dart';
 import 'package:ppkd_batch_3/Day_12/time.dart';
 import 'package:ppkd_batch_3/Day_14/list_map.dart';
+<<<<<<< HEAD
 import 'package:ppkd_batch_3/Day_14/list_model.dart';
 import 'package:ppkd_batch_3/Day_14/list_string.dart';
+=======
+<<<<<<< HEAD
+import 'package:ppkd_batch_3/Day_14/list_model.dart';
+import 'package:ppkd_batch_3/Day_14/list_string.dart';
+=======
+import 'package:ppkd_batch_3/Day_14/list_string.dart';
+import 'package:ppkd_batch_3/Day_14/listbuild.dart';
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
+>>>>>>> e96913a98d87e7b54443140e85da3993f90ae39f
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -103,11 +117,23 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.list),
-            title: const Text('List Build'),
+<<<<<<< HEAD
+            title: const Text('List Model'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const ListModel()),
+=======
+            title: const Text('List Build'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+<<<<<<< HEAD
+                MaterialPageRoute(builder: (context) => const ListModel()),
+=======
+                MaterialPageRoute(builder: (context) => const Day14List()),
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
+>>>>>>> e96913a98d87e7b54443140e85da3993f90ae39f
               );
             },
           ),

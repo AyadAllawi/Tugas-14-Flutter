@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ppkd_batch_3/Day_12/bottnav.dart';
+<<<<<<< HEAD
+// import 'package:ppkd_batch_3/extension/navigation.dart';
+import 'package:ppkd_batch_3/extensions/navigation.dart';
+=======
 import 'package:ppkd_batch_3/extension/navigation.dart';
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -34,7 +39,11 @@ class _LoginState extends State<Login> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
+<<<<<<< HEAD
+            image: AssetImage("assets/images/foto/back.jpg"),
+=======
             image: AssetImage("assets/images/foto/login.jpg"),
+>>>>>>> d24d143e3adfd62f112d87136312235388d7c80f
             fit: BoxFit.cover,
           ),
         ),
