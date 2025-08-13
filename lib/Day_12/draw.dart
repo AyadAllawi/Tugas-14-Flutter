@@ -5,8 +5,8 @@ import 'package:ppkd_batch_3/Day_12/dropdown.dart';
 import 'package:ppkd_batch_3/Day_12/switch.dart';
 import 'package:ppkd_batch_3/Day_12/time.dart';
 import 'package:ppkd_batch_3/Day_14/list_map.dart';
+import 'package:ppkd_batch_3/Day_14/list_model.dart';
 import 'package:ppkd_batch_3/Day_14/list_string.dart';
-import 'package:ppkd_batch_3/Day_14/listbuild.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -107,7 +107,7 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const Day14List()),
+                MaterialPageRoute(builder: (context) => const ListModel()),
               );
             },
           ),
