@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:ppkd_batch_3/Day_15/house.dart';
+import 'package:ppkd_batch_3/Day_16/views/register_screen.dart';
 
 void main() {
   initializeDateFormatting("id_ID");
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      home: Day15Data(),
+      home: RegisterScreen(),
     );
   }
 }
