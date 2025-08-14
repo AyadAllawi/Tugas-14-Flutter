@@ -314,82 +314,83 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ],
-            children: [
-              Expanded(child: Divider()),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  "Or Sign In With",
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Color.fromARGB(153, 42, 42, 43),
-                  ),
-                ),
-              ),
-              Expanded(child: Divider()),
-            ],
-          ),
-          SizedBox(height: 4),
+            //   children: [
+            //     Expanded(child: Divider()),
+            //     Padding(
+            //       padding: EdgeInsets.symmetric(horizontal: 8.0),
+            //       child: Text(
+            //         "Or Sign In With",
+            //         style: TextStyle(
+            //           fontFamily: 'Poppins',
+            //           color: Color.fromARGB(153, 42, 42, 43),
+            //         ),
+            //       ),
+            //     ),
+            //     Expanded(child: Divider()),
+            //   ],
+            // ),
+            // SizedBox(height: 4),
 
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                side: const BorderSide(color: Color(0xFFDDDDDD)),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/foto/google_icon.jpg',
-                    width: 20,
-                    height: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    "Google",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 14,
-                      color: Color(0xFF222222),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: OutlinedButton(
+            //     onPressed: () {},
+            //     style: OutlinedButton.styleFrom(
+            //       backgroundColor: Colors.white,
+            //       padding: const EdgeInsets.symmetric(vertical: 16),
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(30),
+            //       ),
+            //       side: const BorderSide(color: Color(0xFFDDDDDD)),
+            //     ),
+            //     child: Row(
+            //       mainAxisSize: MainAxisSize.min,
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         Image.asset(
+            //           'assets/images/foto/google_icon.jpg',
+            //           width: 20,
+            //           height: 20,
+            //         ),
+            //         const SizedBox(width: 8),
+            //         const Text(
+            //           "Google",
+            //           style: TextStyle(
+            //             fontFamily: 'Poppins',
+            //             fontSize: 14,
+            //             color: Color(0xFF222222),
+            //             fontWeight: FontWeight.bold,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
 
-          const SizedBox(height: 20),
+            // const SizedBox(height: 20),
 
-          // Sign Up
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Don't have an account? ",
-                style: TextStyle(fontFamily: 'Poppins', letterSpacing: -0.5),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: const Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: Color.fromRGBO(40, 63, 177, 1),
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Poppins',
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-            ],
+            // // Sign Up
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     const Text(
+            //       "Don't have an account? ",
+            //       style: TextStyle(fontFamily: 'Poppins', letterSpacing: -0.5),
+            //     ),
+            //     GestureDetector(
+            //       onTap: () {},
+            //       child: const Text(
+            //         "Sign Up",
+            //         style: TextStyle(
+            //           color: Color.fromRGBO(40, 63, 177, 1),
+            //           fontWeight: FontWeight.bold,
+            //           fontFamily: 'Poppins',
+            //           fontSize: 12,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
         ),
       ),
