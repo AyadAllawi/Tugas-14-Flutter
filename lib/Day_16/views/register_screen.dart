@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:ppkd_batch_3/Day_15/form.dart';
 import 'package:ppkd_batch_3/Day_16/model/tiket.dart';
 import 'package:ppkd_batch_3/Day_16/sqflite/db_helper.dart';
-import 'package:ppkd_batch_3/Day_16/views/user_screen.dart';
-import 'package:ppkd_batch_3/extension/navigation.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
-  static const id = "/register";
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   final TextEditingController namaController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController judulFilmController = TextEditingController();
   final TextEditingController jumlahTiketController = TextEditingController();
+
   bool isVisibility = false;
   bool isLoading = false;
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Stack(children: [buildBackground(), buildLayer()]));
@@ -31,12 +31,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() {});
     final nama = namaController.text.trim();
     final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final phone = phoneController.text.trim();
     final judulFilm = judulFilmController.text.trim();
     final jumlahTiket = jumlahTiketController.text.trim();
-    if (nama.isEmpty ||
-        email.isEmpty ||
-        judulFilm.isEmpty ||
-        jumlahTiket.isEmpty) {
+    if (nama.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Nama dan email tidak boleh kosong")),
       );
@@ -47,10 +46,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final user = Tiket(
       nama: nama,
       email: email,
+      phone: phone,
+      password: password,
       judulFilm: judulFilm,
       jumlahTiket: jumlahTiket,
     );
-    await DbHelper.registerTicket(user);
+    await DbHelper.registerUser(user);
     Future.delayed(const Duration(seconds: 1)).then((value) {
       isLoading = false;
       ScaffoldMessenger.of(
@@ -66,12 +67,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
-          key: _formKey,
+          // key: _formKey,
           child: Column(
             spacing: 12,
             children: [
               Text(
-                "Pemesanan Tiket",
+                "Daftar Account",
                 style: TextStyle(fontFamily: 'Anton', fontSize: 24),
               ),
               // Divider(),
@@ -102,21 +103,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   // filled: true,
                   // fillColor: const Color(0xFFFFFFFF),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'name is required';
-                  }
+                // validator: (value) {
+                //   if (value == null || value.isEmpty) {
+                //     return 'name is required';
+                //   }
 
-                  // if (!value.contains("@")) {
-                  //   return "Email Tidak Valid";
-                  // }
-                  // if (!RegExp(
-                  //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                  // ).hasMatch(value)) {
-                  //   return 'Format email tidak valid';
-                  // }
-                  return null;
-                },
+                //   // if (!value.contains("@")) {
+                //   //   return "Email Tidak Valid";
+                //   // }
+                //   // if (!RegExp(
+                //   //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
+                //   // ).hasMatch(value)) {
+                //   //   return 'Format email tidak valid';
+                //   // }
+                //   return null;
+                // },
               ),
               SizedBox(height: 2),
               Row(
@@ -145,26 +146,76 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   // filled: true,
                   // fillColor: const Color(0xFFFFFFFF),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Email is Required';
-                  }
+                // validator: (value) {
+                //   if (value == null || value.isEmpty) {
+                //     return 'Email is Required';
+                //   }
 
-                  if (!value.contains("@")) {
-                    return "Invalid Email";
-                  }
-                  // if (!RegExp(
-                  //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                  // ).hasMatch(value)) {
-                  //   return 'Format email tidak valid';
-                  // }
-                  return null;
-                },
+                //   if (!value.contains("@")) {
+                //     return "Invalid Email";
+                //   }
+                //   // if (!RegExp(
+                //   //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
+                //   // ).hasMatch(value)) {
+                //   //   return 'Format email tidak valid';
+                //   // }
+                //   return null;
+                // },
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Password",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: _isObscure,
+                    decoration: InputDecoration(
+                      hintStyle: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 14,
+                      ),
+                      hintText: "Enter your password",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      // filled: true,
+                      // fillColor: const Color(0xFFFFFFFF),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      ),
+                    ),
+                    // validator: (value) {
+                    //   if (value == null || value.isEmpty) {
+                    //     return 'Password wajib diisi';
+                    //   }
+                    //   if (value.length < 6) {
+                    //     return 'Password minimal 6 karakter';
+                    //   }
+                    //   return null;
+                    // },
+                  ),
+                ],
               ),
               Row(
                 children: [
                   Text(
-                    'Judul Film',
+                    'Phone',
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
@@ -173,52 +224,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ],
               ),
               TextFormConst(
-                hintText: "Ketik Judul Film",
-                controller: judulFilmController,
+                hintText: "Enter your Number Phone",
+                controller: phoneController,
                 onChanged: (p0) {
                   setState(() {});
-                },
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Jumlah Tiket',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              TextFormField(
-                controller: jumlahTiketController,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                  hintStyle: const TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                  ),
-                  hintText: "Jumlah Tiket ",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  // filled: true,
-                  // fillColor: const Color(0xFFFFFFFF),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Tiket was required';
-                  }
-
-                  // if (!value.contains("@")) {
-                  //   return "Email Tidak Valid";
-                  // }
-                  // if (!RegExp(
-                  //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                  // ).hasMatch(value)) {
-                  //   return 'Format email tidak valid';
-                  // }
-                  return null;
                 },
               ),
 
@@ -240,60 +249,70 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Semua validasi lolos
-                      print('Nama: ${namaController.text}');
-                      print('Email: ${emailController.text}');
-                      print('Judul FIlm: ${judulFilmController.text}');
-                      print('Jumlah Tiket: ${jumlahTiketController.text}');
-                      // Tambahin logic login lo di sini bro12.3875
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Lottie.asset(
-                                  "assets/images/animations/Successful.json",
-                                ),
+                    isLoading
+                        ? null
+                        : registerUser(); // context.pushNamed(UserScreen(
+                    //    name: namaController.text,
+                    //                     email: emailController.text,
+                    //                     password: passwordController.text,
+                    //                     judulFilm: judulFilmController.text,
+                    //                     jumlahTiket: jumlahTiketController.text,
+                    // ))
+                    // if (_formKey.currentState!.validate()) {
+                    //   // Semua validasi lolos
+                    //   print('Nama: ${namaController.text}');
+                    //   print('Email: ${emailController.text}');
+                    //   print('Judul FIlm: ${judulFilmController.text}');
+                    //   print('Jumlah Tiket: ${jumlahTiketController.text}');
+                    //   // Tambahin logic login lo di sini bro12.3875
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (context) {
+                    //       return AlertDialog(
+                    //         title: Column(
+                    //           mainAxisSize: MainAxisSize.min,
+                    //           children: [
+                    //             Lottie.asset(
+                    //               "assets/images/animations/Successful.json",
+                    //             ),
 
-                                Text("Pemesanan Berhasil!"),
-                              ],
-                            ),
+                    //             Text("Pemesanan Berhasil!"),
+                    //           ],
+                    //         ),
 
-                            content: Text(
-                              "Kamu Berhasil Memesan!",
-                              textAlign: TextAlign.center,
-                            ),
-                            actions: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    context.push(
-                                      UserScreen(
-                                        nama: namaController.text,
-                                        email: emailController.text,
-                                        judulFilm: judulFilmController.text,
-                                        jumlahTiket: jumlahTiketController.text,
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    "Next",
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    }
+                    //         content: Text(
+                    //           "Kamu Berhasil Memesan!",
+                    //           textAlign: TextAlign.center,
+                    //         ),
+                    //         actions: [
+                    //           SizedBox(
+                    //             width: double.infinity,
+                    //             child: ElevatedButton(
+                    //               onPressed: () {
+                    //                 context.push(
+                    //                   UserScreen(
+                    //                     // name: namaController.text,
+                    //                     // email: emailController.text,
+                    //                     // password: passwordController.text,
+                    //                     // judulFilm: judulFilmController.text,
+                    //                     // jumlahTiket: jumlahTiketController.text,
+                    //                   ),
+                    //                 );
+                    //               },
+                    //               child: Text(
+                    //                 "Next",
+                    //                 style: TextStyle(
+                    //                   fontFamily: 'Poppins',
+                    //                   color: Colors.black,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       );
+                    //     },
+                    //   );
+                    // }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -303,7 +322,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   child: const Text(
-                    "Pesan",
+                    "Daftar",
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
@@ -314,83 +333,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ],
-            //   children: [
-            //     Expanded(child: Divider()),
-            //     Padding(
-            //       padding: EdgeInsets.symmetric(horizontal: 8.0),
-            //       child: Text(
-            //         "Or Sign In With",
-            //         style: TextStyle(
-            //           fontFamily: 'Poppins',
-            //           color: Color.fromARGB(153, 42, 42, 43),
-            //         ),
-            //       ),
-            //     ),
-            //     Expanded(child: Divider()),
-            //   ],
-            // ),
-            // SizedBox(height: 4),
-
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: OutlinedButton(
-            //     onPressed: () {},
-            //     style: OutlinedButton.styleFrom(
-            //       backgroundColor: Colors.white,
-            //       padding: const EdgeInsets.symmetric(vertical: 16),
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(30),
-            //       ),
-            //       side: const BorderSide(color: Color(0xFFDDDDDD)),
-            //     ),
-            //     child: Row(
-            //       mainAxisSize: MainAxisSize.min,
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: [
-            //         Image.asset(
-            //           'assets/images/foto/google_icon.jpg',
-            //           width: 20,
-            //           height: 20,
-            //         ),
-            //         const SizedBox(width: 8),
-            //         const Text(
-            //           "Google",
-            //           style: TextStyle(
-            //             fontFamily: 'Poppins',
-            //             fontSize: 14,
-            //             color: Color(0xFF222222),
-            //             fontWeight: FontWeight.bold,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-
-            // const SizedBox(height: 20),
-
-            // // Sign Up
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     const Text(
-            //       "Don't have an account? ",
-            //       style: TextStyle(fontFamily: 'Poppins', letterSpacing: -0.5),
-            //     ),
-            //     GestureDetector(
-            //       onTap: () {},
-            //       child: const Text(
-            //         "Sign Up",
-            //         style: TextStyle(
-            //           color: Color.fromRGBO(40, 63, 177, 1),
-            //           fontWeight: FontWeight.bold,
-            //           fontFamily: 'Poppins',
-            //           fontSize: 12,
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ),
         ),
       ),

@@ -1,47 +1,23 @@
-// import 'package:path/path.dart';
-// import 'package:ppkd_batch_3/Day_16/model/tiket.dart';
-// import 'package:sqflite/sqflite.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// class DbHelper {
-//   static Future<Database> databaseHelper() async {
-//     final dbPath = await getDatabasesPath();
-//     return openDatabase(
-//       join(dbPath, 'login.db'),
-//       onCreate: (db, version) {
-//         return db.execute(
-//           'CREATE TABLE users(id INTEGER PRIMARY KEY, email TEXT, password TEXT, name TEXT)',
-//         );
-//       },
-//       version: 1,
-//     );
-//   }
+class PreferenceHandler {
+  static const String _keyLogin = "isLogin";
 
-//   static Future<void> registerUser(User user) async {
-//     final db = await databaseHelper();
-//     await db.insert(
-//       'users',
-//       user.toMap(),
-//       conflictAlgorithm: ConflictAlgorithm.replace,
-//     );
-//   }
+  // Simpan status login
+  static Future<void> setLogin(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyLogin, value);
+  }
 
-//   static Future<User?> loginUser(String email, String password) async {
-//     final db = await databaseHelper();
-//     final List<Map<String, dynamic>> results = await db.query(
-//       'users',
-//       where: 'email = ? AND password = ?',
-//       whereArgs: [email, password],
-//     );
+  // Ambil status login
+  static Future<bool?> getLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_keyLogin);
+  }
 
-//     if (results.isNotEmpty) {
-//       return User.fromMap(results.first);
-//     }
-//     return null;
-//   }
-
-//   static Future<List<User>> getAllUsers() async {
-//     final db = await databaseHelper();
-//     final List<Map<String, dynamic>> results = await db.query('users');
-//     return results.map((e) => User.fromMap(e)).toList();
-//   }
-// }
+  // Hapus status login
+  static Future<void> clearLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_keyLogin);
+  }
+}

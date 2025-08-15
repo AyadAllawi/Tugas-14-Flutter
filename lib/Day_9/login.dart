@@ -1,25 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:ppkd_batch_3/Day_12/bottnav.dart';
+import 'package:ppkd_batch_3/Day_16/preference/shared_preference.dart';
+import 'package:ppkd_batch_3/Day_16/sqflite/db_helper.dart';
+import 'package:ppkd_batch_3/Day_16/views/register_screen.dart';
 // import 'package:ppkd_batch_3/extension/navigation.dart';
 
 import 'package:ppkd_batch_3/extension/navigation.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
-
+  static const id = "/login";
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool _isObscure = true;
+
+  login() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+    final phone = _phoneController.text.trim();
+    if (email.isEmpty || password.isEmpty || phone.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Email, Password, Phone cannot be empty")),
+      );
+      return;
+    }
+    final userData = await DbHelper.loginUser(email, password, phone);
+    if (userData != null) {
+      PreferenceHandler.setLogin(true);
+      context.pushReplacementNamed(BotNav1.id);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Incorrect email or password")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +67,7 @@ class _LoginState extends State<Login> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
         child: Form(
-          key: _formKey, // 🔑 tambahin Form
+          // key: _formKey, // 🔑 tambahin Form
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,8 +119,8 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        filled: true,
-                        fillColor: const Color(0xFFFFFFFF),
+                        // filled: true,
+                        // fillColor: const Color(0xFFFFFFFF),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -107,12 +130,13 @@ class _LoginState extends State<Login> {
                         if (!value.contains("@")) {
                           return "Email Tidak Valid";
                         }
-                        // if (!RegExp(
-                        //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                        // ).hasMatch(value)) {
-                        //   return 'Format email tidak valid';
-                        // }
                         return null;
+                        //   // if (!RegExp(
+                        //   //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
+                        //   // ).hasMatch(value)) {
+                        //   //   return 'Format email tidak valid';
+                        //   // }
+                        //   return null;
                       },
                     ),
                   ],
@@ -146,8 +170,8 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        filled: true,
-                        fillColor: const Color(0xFFFFFFFF),
+                        // filled: true,
+                        // fillColor: const Color(0xFFFFFFFF),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -157,10 +181,11 @@ class _LoginState extends State<Login> {
                         if (value.length < 6) {
                           return "No Telfon tidak boleh kurang dari 6 angka";
                         }
-                        // if (!RegExp(r'^[0-9]{10,13}$').hasMatch(value)) {
-                        //   return 'Nomor tidak valid (10-13 digit)';
-                        // }
                         return null;
+                        //   // if (!RegExp(r'^[0-9]{10,13}$').hasMatch(value)) {
+                        //   //   return 'Nomor tidak valid (10-13 digit)';
+                        //   // }
+                        //   return null;
                       },
                     ),
                   ],
@@ -194,8 +219,8 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        filled: true,
-                        fillColor: const Color(0xFFFFFFFF),
+                        // filled: true,
+                        // fillColor: const Color(0xFFFFFFFF),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _isObscure
@@ -243,43 +268,45 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Semua validasi lolos
-                        print('Email: ${_emailController.text}');
-                        print('Phone: ${_phoneController.text}');
-                        print('Password: ${_passwordController.text}');
-                        // Tambahin logic login lo di sini bro12.3875
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Lottie.asset(
-                                    "assets/images/animations/Successful.json",
-                                  ),
+                      login();
 
-                                  Text("Login Berhasil!"),
-                                ],
-                              ),
+                      // if (_formKey.currentState!.validate()) {
+                      //   // Semua validasi lolos
+                      //   print('Email: ${_emailController.text}');
+                      //   print('Phone: ${_phoneController.text}');
+                      //   print('Password: ${_passwordController.text}');
+                      //   // Tambahin logic login lo di sini bro12.3875
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return AlertDialog(
+                      //         title: Column(
+                      //           mainAxisSize: MainAxisSize.min,
+                      //           children: [
+                      //             Lottie.asset(
+                      //               "assets/images/animations/Successful.json",
+                      //             ),
 
-                              // content: Text(
-                              //   "Anda Berhasil Login!",
-                              //   textAlign: TextAlign.center,
-                              // ),
-                              actions: [
-                                TextButton(
-                                  child: Text("DONE"),
-                                  onPressed: () {
-                                    context.push(BotNav1());
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
+                      //             Text("Login Berhasil!"),
+                      //           ],
+                      //         ),
+
+                      //         // content: Text(
+                      //         //   "Anda Berhasil Login!",
+                      //         //   textAlign: TextAlign.center,
+                      //         // ),
+                      //         actions: [
+                      //           TextButton(
+                      //             child: Text("DONE"),
+                      //             onPressed: () {
+                      //               context.push(BotNav1());
+                      //             },
+                      //           ),
+                      //         ],
+                      //       );
+                      //     },
+                      //   );
+                      // }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -357,7 +384,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 1),
 
                 // Sign Up
                 Row(
@@ -370,8 +397,7 @@ class _LoginState extends State<Login> {
                         letterSpacing: -0.5,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {},
+                    TextButton(
                       child: const Text(
                         "Sign Up",
                         style: TextStyle(
@@ -381,6 +407,9 @@ class _LoginState extends State<Login> {
                           fontSize: 12,
                         ),
                       ),
+                      onPressed: () {
+                        context.push(RegisterScreen());
+                      },
                     ),
                   ],
                 ),

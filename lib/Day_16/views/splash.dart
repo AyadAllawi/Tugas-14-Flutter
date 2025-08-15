@@ -1,23 +1,51 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'package:ppkd_batch_3/Day_12/bottnav.dart';
+import 'package:ppkd_batch_3/Day_16/preference/shared_preference.dart';
+import 'package:ppkd_batch_3/Day_16/utils/app_image.dart';
+import 'package:ppkd_batch_3/Day_16/views/register_screen.dart';
+import 'package:ppkd_batch_3/extension/navigation.dart';
 
-class PreferenceHandler {
-  static const String _keyLogin = "isLogin";
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+  static const id = "/splash_screen";
 
-  // Simpan status login
-  static Future<void> setLogin(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_keyLogin, value);
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    isLogin();
   }
 
-  // Ambil status login
-  static Future<bool?> getLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_keyLogin);
+  void isLogin() async {
+    bool? isLogin = await PreferenceHandler.getLogin();
+
+    Future.delayed(Duration(seconds: 3)).then((value) async {
+      print(isLogin);
+      if (isLogin == true) {
+        context.pushReplacement(BotNav1());
+      } else {
+        context.push(RegisterScreen());
+      }
+    });
   }
 
-  // Hapus status login
-  static Future<void> clearLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_keyLogin);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(AppImage.disdik),
+            SizedBox(height: 20),
+            Text("Welcome"),
+          ],
+        ),
+      ),
+    );
   }
 }

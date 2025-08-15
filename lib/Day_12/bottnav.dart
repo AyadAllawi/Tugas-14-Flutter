@@ -4,6 +4,7 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:flutter/material.dart';
 import 'package:ppkd_batch_3/Day_12/about.dart';
 import 'package:ppkd_batch_3/Day_12/halaman.dart';
+import 'package:ppkd_batch_3/Day_16/widgets/log_out.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
 
 class BotNav1 extends StatefulWidget {
   const BotNav1({super.key});
+  static const id = '/bot';
 
   @override
   State<BotNav1> createState() => _BotNav1State();
@@ -54,7 +56,7 @@ class _BotNav1State extends State<BotNav1> {
       // Halaman
       const Halaman(),
       const About(),
-      const Page3(),
+      const LogOutButton(),
       // const Page4(),
       // const Page5(),
     ];
