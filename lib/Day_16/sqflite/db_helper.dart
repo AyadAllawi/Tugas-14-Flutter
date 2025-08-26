@@ -30,11 +30,14 @@ class DbHelper {
     String email,
     String password,
     String phone,
+    // String judulFilm,
+    // String jumlaTiket,
   ) async {
     final db = await _databaseHelper();
     final List<Map<String, dynamic>> results = await db.query(
       'tickets',
-      where: 'email = ? AND password = ? AND phone = ?',
+      where:
+          'email = ? AND password = ? AND phone = ? AND judulFIlm = ? AND jumlahTiket = ?',
       whereArgs: [email, password, phone],
     );
 

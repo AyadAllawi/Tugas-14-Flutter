@@ -115,11 +115,6 @@ class _Day15DataState extends State<Day15Data> {
                   if (!value.contains("@")) {
                     return "Invalid Email";
                   }
-                  // if (!RegExp(
-                  //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                  // ).hasMatch(value)) {
-                  //   return 'Format email tidak valid';
-                  // }
                   return null;
                 },
               ),
