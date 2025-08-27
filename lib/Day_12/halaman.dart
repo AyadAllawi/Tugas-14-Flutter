@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ppkd_batch_3/Day_12/checkbox.dart';
-import 'package:ppkd_batch_3/Day_12/draw.dart';
 
 class Halaman extends StatefulWidget {
   const Halaman({super.key});
@@ -13,8 +12,11 @@ class _HalamanState extends State<Halaman> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Dashboard")),
-      drawer: MyDrawer(),
+      appBar: AppBar(
+        title: Text("Dashboard"),
+        automaticallyImplyLeading: false,
+      ),
+
       body: Container(
         height: double.infinity,
         width: double.infinity,

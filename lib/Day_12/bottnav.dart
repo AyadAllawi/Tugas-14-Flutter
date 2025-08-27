@@ -51,9 +51,7 @@ class _BotNav1State extends State<BotNav1> {
 
   @override
   Widget build(BuildContext context) {
-    /// widget list
     final List<Widget> bottomBarPages = [
-      // Halaman
       const Halaman(),
       const About(),
       const LogOutButton(),

@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  // final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
         child: Form(
-          // key: _formKey, // 🔑 tambahin Form
+          key: _formKey, // 🔑 tambahin Form
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -270,43 +270,43 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       login();
 
-                      // if (_formKey.currentState!.validate()) {
-                      //   // Semua validasi lolos
-                      //   print('Email: ${_emailController.text}');
-                      //   print('Phone: ${_phoneController.text}');
-                      //   print('Password: ${_passwordController.text}');
-                      //   // Tambahin logic login lo di sini bro12.3875
-                      //   showDialog(
-                      //     context: context,
-                      //     builder: (context) {
-                      //       return AlertDialog(
-                      //         title: Column(
-                      //           mainAxisSize: MainAxisSize.min,
-                      //           children: [
-                      //             Lottie.asset(
-                      //               "assets/images/animations/Successful.json",
-                      //             ),
+                      if (_formKey.currentState!.validate()) {
+                        // Semua validasi lolos
+                        print('Email: ${_emailController.text}');
+                        print('Phone: ${_phoneController.text}');
+                        print('Password: ${_passwordController.text}');
+                        // Tambahin logic login lo di sini bro12.3875
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                // children: [
+                                //   Lottie.asset(
+                                //     "assets/images/animations/Successful.json",
+                                //   ),
 
-                      //             Text("Login Berhasil!"),
-                      //           ],
-                      //         ),
+                                //   Text("Login Berhasil!"),
+                                // ],
+                              ),
 
-                      //         // content: Text(
-                      //         //   "Anda Berhasil Login!",
-                      //         //   textAlign: TextAlign.center,
-                      //         // ),
-                      //         actions: [
-                      //           TextButton(
-                      //             child: Text("DONE"),
-                      //             onPressed: () {
-                      //               context.push(BotNav1());
-                      //             },
-                      //           ),
-                      //         ],
-                      //       );
-                      //     },
-                      //   );
-                      // }
+                              content: Text(
+                                "Anda Berhasil Login!",
+                                textAlign: TextAlign.center,
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: Text("DONE"),
+                                  onPressed: () {
+                                    context.push(BotNav1());
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),

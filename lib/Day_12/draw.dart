@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ppkd_batch_3/Day_12/bottnav.dart';
 import 'package:ppkd_batch_3/Day_12/checkbox.dart';
 import 'package:ppkd_batch_3/Day_12/date.dart';
 import 'package:ppkd_batch_3/Day_12/dropdown.dart';
@@ -8,6 +9,7 @@ import 'package:ppkd_batch_3/Day_14/list_map.dart';
 import 'package:ppkd_batch_3/Day_14/list_model.dart';
 import 'package:ppkd_batch_3/Day_14/list_string.dart';
 import 'package:ppkd_batch_3/Day_16/views/user_screen.dart';
+import 'package:ppkd_batch_3/Day_23/View/get_api.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -26,12 +28,27 @@ class _MyDrawerState extends State<MyDrawer> {
           const DrawerHeader(
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 114, 127, 138),
+              image: DecorationImage(
+                image: AssetImage('assets/images/foto/AyadAllawi.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
             child: Text(
               'Dashboard',
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
           ),
+          ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const BotNav1()),
+              );
+            },
+          ),
+
           ListTile(
             leading: const Icon(Icons.account_box),
             title: const Text('CheckBox'),
@@ -42,6 +59,7 @@ class _MyDrawerState extends State<MyDrawer> {
               );
             },
           ),
+
           ListTile(
             leading: const Icon(Icons.switch_access_shortcut),
             title: const Text('Switch'),
@@ -124,16 +142,16 @@ class _MyDrawerState extends State<MyDrawer> {
               );
             },
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.build),
-          //   title: const Text('List Build'),
-          //   onTap: () {
-          //     Navigator.pushReplacement(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => const Day14List()),
-          //     );
-          //   },
-          // ),
+          ListTile(
+            leading: const Icon(Icons.photo_library),
+            title: const Text('Cart Gallery'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const CatScreen()),
+              );
+            },
+          ),
         ],
       ),
     );
