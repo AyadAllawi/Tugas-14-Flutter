@@ -24,7 +24,7 @@ class _CatScreenState extends State<CatScreen> {
 
       appBar: AppBar(
         title: Text(
-          "Cat Galery",
+          "Cat API",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
