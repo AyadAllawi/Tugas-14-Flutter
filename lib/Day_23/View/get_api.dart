@@ -13,18 +13,11 @@ class CatScreen extends StatefulWidget {
 
 class _CatScreenState extends State<CatScreen> {
   @override
-  // void initState() {
-  //   super.initState();
-  //   getUser();
-  // }
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 62, 61, 65),
-
       appBar: AppBar(
-        title: Text(
-          "Cat API",
+        title: const Text(
+          "Cat Gallery",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -32,44 +25,114 @@ class _CatScreenState extends State<CatScreen> {
             color: Color.fromARGB(255, 31, 33, 36),
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 191, 188, 197),
+        backgroundColor: const Color.fromARGB(255, 191, 188, 197),
         centerTitle: true,
         elevation: 0,
       ),
-      drawer: MyDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      drawer: const MyDrawer(),
 
-          children: [
-            FutureBuilder<List<Welcome>>(
-              future: getUser(),
-              builder:
-                  (
-                    BuildContext context,
-                    AsyncSnapshot<List<Welcome>> snapshot,
-                  ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else if (snapshot.hasData) {
-                      final users = snapshot.data!;
-                      return GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(16),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 8,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: 1.0,
-                            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/foto/login.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              FutureBuilder<List<Welcome>>(
+                future: getUser(),
+                builder: (BuildContext context, AsyncSnapshot<List<Welcome>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    final users = snapshot.data!;
+                    return GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.all(16),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 8,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 1.0,
+                          ),
+                      shrinkWrap: true,
+                      itemCount: users.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final dataCat = users[index];
+                        return InkWell(
+                          borderRadius: BorderRadius.circular(16),
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.white,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                ),
+                              ),
+                              builder: (context) {
+                                return DraggableScrollableSheet(
+                                  expand: false,
+                                  initialChildSize: 0.5,
+                                  minChildSize: 0.3,
+                                  maxChildSize: 0.9,
+                                  builder: (context, scrollController) {
+                                    return SingleChildScrollView(
+                                      controller: scrollController,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              child: Image.network(
+                                                dataCat.url,
+                                                fit: BoxFit.cover,
+                                                width: double.infinity,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 12),
+                                            Text(
+                                              "Cat ${dataCat.id}",
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            const Text(
+                                              "Ini adalah kucing lucu dari API 😺 "
+                                              "Keterangan ini bisa panjang, jadi bisa discroll.",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            // ElevatedButton.icon(
+                                            //   onPressed: () =>
+                                            //       Navigator.pop(context),
+                                            //   icon: const Icon(Icons.close),
+                                            //   label: const Text(''),
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          },
 
-                        shrinkWrap: true,
-                        itemCount: users.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final dataCat = users[index];
-                          return Card(
-                            elevation: 2,
+                          child: Card(
+                            elevation: 5,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -82,46 +145,39 @@ class _CatScreenState extends State<CatScreen> {
                                       dataCat.url,
                                       fit: BoxFit.cover,
                                       width: double.infinity,
-                                      loadingBuilder:
-                                          (context, child, loadingProgress) {
-                                            if (loadingProgress == null)
-                                              return child;
-                                            return Center(
-                                              child: Container(
-                                                child:
-                                                    const CircularProgressIndicator(),
-                                              ),
-                                            );
-                                          },
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                            return const Icon(
-                                              Icons.error,
-                                              color: Colors.red,
-                                            );
-                                          },
                                     ),
                                   ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.all(8.0),
-                                  //   child: Text(
-                                  //     'ID: ${dataCat.id}',
-                                  //     style: const TextStyle(fontSize: 12),
-                                  //     overflow: TextOverflow.ellipsis,
-                                  //   ),
-                                  // ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Cat ${dataCat.id}',
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Poppins',
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                          );
-                        },
-                      );
-                    } else {
-                      return Text("Failed to Load Data");
-                    }
-                  },
-            ),
-          ],
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: Text(
+                        "Failed to Load Data",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

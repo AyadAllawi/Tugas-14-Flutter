@@ -10,7 +10,7 @@ class DbHelper {
       join(dbPath, 'tiket.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE tickets(id INTEGER PRIMARY KEY AUTOINCREMENT, nama TEXT, email TEXT, phone TEXT, password TEXT,)',
+          'CREATE TABLE tickets(id INTEGER PRIMARY KEY AUTOINCREMENT, nama TEXT, email TEXT, password TEXT,)',
         );
       },
       version: 1,
@@ -29,7 +29,6 @@ class DbHelper {
   static Future<Tiket?> loginUser(
     String email,
     String password,
-    String phone,
     // String judulFilm,
     // String jumlaTiket,
   ) async {
@@ -38,7 +37,7 @@ class DbHelper {
       'tickets',
       where:
           'email = ? AND password = ? AND phone = ? AND judulFIlm = ? AND jumlahTiket = ?',
-      whereArgs: [email, password, phone],
+      whereArgs: [email, password,],
     );
 
     if (results.isNotEmpty) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ppkd_batch_3/Day_12/bottnav.dart';
-import 'package:ppkd_batch_3/Day_16/preference/shared_preference.dart';
 import 'package:ppkd_batch_3/Day_16/utils/app_image.dart';
 import 'package:ppkd_batch_3/Day_16/views/register_screen.dart';
 import 'package:ppkd_batch_3/extension/navigation.dart';
+import 'package:ppkd_batch_3/preference/shared_preference.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

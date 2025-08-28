@@ -1,47 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:ppkd_batch_3/Day_12/bottnav.dart';
-import 'package:ppkd_batch_3/Day_16/sqflite/db_helper.dart';
-import 'package:ppkd_batch_3/Day_16/views/register_screen.dart';
-// import 'package:ppkd_batch_3/extension/navigation.dart';
-
+import 'package:ppkd_batch_3/Day_25/api/register_user.dart';
+import 'package:ppkd_batch_3/Day_25/model/register_model.dart';
+import 'package:ppkd_batch_3/Day_25/views/post_api.dart';
 import 'package:ppkd_batch_3/extension/navigation.dart';
 import 'package:ppkd_batch_3/preference/shared_preference.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
-  static const id = "/login";
+class LoginAPIScreen extends StatefulWidget {
+  const LoginAPIScreen({super.key});
+  static const id = "/login_api";
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginAPIScreen> createState() => _LoginAPIScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginAPIScreenState extends State<LoginAPIScreen> {
   final _formKey = GlobalKey<FormState>();
-
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isVisibility = false;
+  RegisterUserModel? user;
+  String? errorMessage;
+  bool isLoading = false;
 
   bool _isObscure = true;
 
-  login() async {
-    final email = _emailController.text.trim();
-    final password = _passwordController.text.trim();
-    final phone = _phoneController.text.trim();
-    if (email.isEmpty || password.isEmpty || phone.isEmpty) {
+  void loginUser() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Email, Password, Phone cannot be empty")),
+        const SnackBar(
+          content: Text("Email, Password, dan Nama tidak boleh kosong"),
+        ),
       );
+      isLoading = false;
+
       return;
     }
-    final userData = await DbHelper.loginUser(email, password);
-    if (userData != null) {
-      PreferenceHandler.getLogin();
-      context.pushReplacementNamed(BotNav1.id);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Incorrect email or password")),
+    try {
+      final result = await AuthenticationAPI.loginUser(
+        email: email,
+        password: password,
       );
+      setState(() {
+        user = result;
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Login berhasil")));
+      PreferenceHandler.saveToken(user?.data?.token.toString() ?? "");
+      print(user?.toJson());
+    } catch (e) {
+      print(e);
+      setState(() {
+        errorMessage = e.toString();
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(errorMessage.toString())));
+    } finally {
+      setState(() {});
+      isLoading = false;
     }
+    // final user = User(email: email, password: password, name: name);
+    // await DbHelper.registerUser(user);
+    // Future.delayed(const Duration(seconds: 1)).then((value) {
+    //   isLoading = false;
+    //   ScaffoldMessenger.of(
+    //     context,
+    //   ).showSnackBar(const SnackBar(content: Text("Pendaftaran berhasil")));
+    // });
   }
 
   @override
@@ -106,9 +137,9 @@ class _LoginState extends State<Login> {
                         color: Color(0xFF888888),
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 10),
                     TextFormField(
-                      controller: _emailController,
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintStyle: const TextStyle(
@@ -122,76 +153,27 @@ class _LoginState extends State<Login> {
                         // filled: true,
                         // fillColor: const Color(0xFFFFFFFF),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Email wajib diisi';
-                        }
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Email wajib diisi';
+                      //   }
 
-                        if (!value.contains("@")) {
-                          return "Email Tidak Valid";
-                        }
-                        return null;
-                        //   // if (!RegExp(
-                        //   //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                        //   // ).hasMatch(value)) {
-                        //   //   return 'Format email tidak valid';
-                        //   // }
-                        //   return null;
-                      },
+                      //   if (!value.contains("@")) {
+                      //     return "Email Tidak Valid";
+                      //   }
+                      //   return null;
+                      //   //   // if (!RegExp(
+                      //   //   //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
+                      //   //   // ).hasMatch(value)) {
+                      //   //   //   return 'Format email tidak valid';
+                      //   //   // }
+                      //   //   return null;
+                      // },
                     ),
                   ],
                 ),
 
-                const SizedBox(height: 28),
-
-                // PHONE
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Phone Number",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Poppins',
-                        color: Color(0xFF888888),
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    TextFormField(
-                      controller: _phoneController,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        hintStyle: const TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 14,
-                        ),
-                        hintText: "Enter your phone",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        // filled: true,
-                        // fillColor: const Color(0xFFFFFFFF),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Nomor telepon wajib diisi';
-                        }
-
-                        if (value.length < 6) {
-                          return "No Telfon tidak boleh kurang dari 6 angka";
-                        }
-                        return null;
-                        //   // if (!RegExp(r'^[0-9]{10,13}$').hasMatch(value)) {
-                        //   //   return 'Nomor tidak valid (10-13 digit)';
-                        //   // }
-                        //   return null;
-                      },
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 18),
+                const SizedBox(height: 15),
 
                 // PASSWORD
                 Column(
@@ -208,7 +190,7 @@ class _LoginState extends State<Login> {
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
-                      controller: _passwordController,
+                      controller: passwordController,
                       obscureText: _isObscure,
                       decoration: InputDecoration(
                         hintStyle: const TextStyle(
@@ -268,45 +250,10 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      login();
-
-                      if (_formKey.currentState!.validate()) {
-                        // Semua validasi lolos
-                        print('Email: ${_emailController.text}');
-                        print('Phone: ${_phoneController.text}');
-                        print('Password: ${_passwordController.text}');
-                        // Tambahin logic login lo di sini bro12.3875
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                // children: [
-                                //   Lottie.asset(
-                                //     "assets/images/animations/Successful.json",
-                                //   ),
-
-                                //   Text("Login Berhasil!"),
-                                // ],
-                              ),
-
-                              content: Text(
-                                "Anda Berhasil Login!",
-                                textAlign: TextAlign.center,
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: Text("DONE"),
-                                  onPressed: () {
-                                    context.push(BotNav1());
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
+                      setState(() {
+                        print("object");
+                      });
+                      loginUser();
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -408,7 +355,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       onPressed: () {
-                        context.push(RegisterScreen());
+                        context.push(PostApiScreen());
                       },
                     ),
                   ],

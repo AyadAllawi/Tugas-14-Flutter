@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:ppkd_batch_3/Day_9/login.dart';
+import 'package:ppkd_batch_3/Day_25/views/login_api.dart';
 
 void main() {
   initializeDateFormatting("id_ID");
@@ -35,18 +35,18 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 3, 3, 3),
         ),
       ),
-      initialRoute: Login.id,
-      routes: {
-        '/login': (context) => Login(),
+      // initialRoute: LoginAPIScreen.id,
+      // routes: {
+      //   '/login': (context) => LoginAPIScreen(),
 
-        // // Tugas10.id: (context) => Tugas10(),
-        // RegisterScreen.id: (context) => const RegisterScreen(),
-        // // '/Tugastes': (context) => Tugastes(),
-        // // Tugas7flutter.id: (context) => Tugas7flutter(),
-        // Tugas8.id: (context) => Tugas8(),
-        // },
-        // home: CatScreen(),
-      },
+      // // Tugas10.id: (context) => Tugas10(),
+      // RegisterScreen.id: (context) => const RegisterScreen(),
+      // // '/Tugastes': (context) => Tugastes(),
+      // // Tugas7flutter.id: (context) => Tugas7flutter(),
+      // Tugas8.id: (context) => Tugas8(),
+      // },
+      home: LoginAPIScreen(),
+      // },
     );
     // Navigator.pushNamed(context, '/Tugas6');
     // return MaterialApp(
