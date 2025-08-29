@@ -19,6 +19,8 @@ class _PostApiScreenState extends State<PostApiScreen> {
   String? errorMessage;
   bool isVisibility = false;
   bool isLoading = false;
+
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Stack(children: [buildBackground(), buildLayer()]));
@@ -38,6 +40,7 @@ class _PostApiScreenState extends State<PostApiScreen> {
           content: Text("Email, Password, dan Nama tidak boleh kosong"),
         ),
       );
+
       isLoading = false;
 
       return;
@@ -81,54 +84,161 @@ class _PostApiScreenState extends State<PostApiScreen> {
   SafeArea buildLayer() {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 40),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "Register API",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              SizedBox(height: 90),
+              const Text(
+                "Welcome Back",
+                style: TextStyle(
+                  fontFamily: 'Poppins-Bold',
+                  fontSize: 24,
+                  letterSpacing: -0.7,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF222222),
+                ),
               ),
-              height(24),
-              buildTitle("Email Address"),
-              height(12),
-              buildTextField(
-                hintText: "Enter your email",
-                controller: emailController,
+              // const SizedBox(height: 15),
+              const Text(
+                "Login to access your account",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFF888888),
+                  fontFamily: 'Poppins',
+                ),
               ),
-              height(16),
-              buildTitle("Name"),
-              height(12),
-              buildTextField(
-                hintText: "Enter your name",
-                controller: nameController,
+              const SizedBox(height: 30),
+
+              // EMAIL
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Name",
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF888888),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: nameController,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      hintStyle: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                      ),
+                      hintText: "Enter your name",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      // filled: true,
+                      // fillColor: const Color(0xFFFFFFFF),
+                    ),
+                  ),
+                ],
               ),
-              height(16),
-              buildTitle("Password"),
-              height(12),
-              buildTextField(
-                hintText: "Enter your password",
-                isPassword: true,
-                controller: passwordController,
+              SizedBox(height: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Email Address",
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF888888),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hintStyle: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                      ),
+                      hintText: "Enter your email",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      // filled: true,
+                      // fillColor: const Color(0xFFFFFFFF),
+                    ),
+                  ),
+                ],
               ),
-              height(12),
+
+              const SizedBox(height: 8),
+
+              // PASSWORD
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Password",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Poppins',
+                      color: Color(0xFF888888),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: _isObscure,
+                    decoration: InputDecoration(
+                      hintStyle: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 14,
+                      ),
+                      hintText: "Enter your password",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      // filled: true,
+                      // fillColor: const Color(0xFFFFFFFF),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Password wajib diisi';
+                      }
+                      if (value.length < 6) {
+                        return 'Password minimal 6 karakter';
+                      }
+                      return null;
+                    },
+                  ),
+                ],
+              ),
+
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => MeetSebelas()),
-                    // );
-                  },
-                  child: Text(
+                  onPressed: () {},
+                  child: const Text(
                     "Forgot Password?",
                     style: TextStyle(
-                      fontSize: 12,
-                      // color: AppColor.orange,
-                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFF34B1B),
+                      fontFamily: 'Poppins',
                     ),
                   ),
                 ),
@@ -142,15 +252,16 @@ class _PostApiScreenState extends State<PostApiScreen> {
                     registerUser();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: const Color(0xFF283FB1),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   child: isLoading
                       ? CircularProgressIndicator()
                       : Text(
-                          "Daftar",
+                          "Register",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -187,25 +298,36 @@ class _PostApiScreenState extends State<PostApiScreen> {
 
               height(16),
               SizedBox(
-                height: 48,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    side: const BorderSide(color: Color(0xFFDDDDDD)),
                   ),
-                  onPressed: () {
-                    // Navigate to MeetLima screen menggunakan pushnamed
-                    Navigator.pushNamed(context, "/meet_2");
-                  },
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "assets/images/foto/google_icon.jpg",
-                        height: 16,
-                        width: 16,
+                        'assets/images/foto/google_icon.jpg',
+                        width: 20,
+                        height: 20,
                       ),
-                      width(4),
-                      Text("Google"),
+                      const SizedBox(width: 8),
+                      const Text(
+                        "Google",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 14,
+                          color: Color(0xFF222222),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -214,9 +336,12 @@ class _PostApiScreenState extends State<PostApiScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Don't have an account?",
-                    // style: TextStyle(fontSize: 12, color: AppColor.gray88),
+                  const Text(
+                    "Don't have an account? ",
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      letterSpacing: -0.5,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
@@ -227,12 +352,13 @@ class _PostApiScreenState extends State<PostApiScreen> {
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Sign Up",
                       style: TextStyle(
-                        // color: AppColor.blueButton,
-                        fontSize: 12,
+                        color: Color.fromRGBO(40, 63, 177, 1),
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins',
+                        fontSize: 12,
                       ),
                     ),
                   ),

@@ -10,6 +10,7 @@ import 'package:ppkd_batch_3/Day_14/list_model.dart';
 import 'package:ppkd_batch_3/Day_14/list_string.dart';
 import 'package:ppkd_batch_3/Day_16/views/user_screen.dart';
 import 'package:ppkd_batch_3/Day_23/View/get_api.dart';
+import 'package:ppkd_batch_3/Day_25/views/data.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -44,7 +45,7 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const BotNav1()),
+                MaterialPageRoute(builder: (context) => Bottom()),
               );
             },
           ),
@@ -149,6 +150,18 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const CatScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.account_circle),
+            title: const Text('Account'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DatabaseAccount(),
+                ),
               );
             },
           ),

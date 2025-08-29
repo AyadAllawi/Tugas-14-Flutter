@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 3)).then((value) async {
       print(isLogin);
       if (isLogin == true) {
-        context.pushReplacement(BotNav1());
+        context.pushReplacement(Bottom());
       } else {
         context.push(RegisterScreen());
       }

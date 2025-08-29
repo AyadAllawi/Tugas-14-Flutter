@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ppkd_batch_3/Day_12/bottnav.dart';
 import 'package:ppkd_batch_3/Day_25/api/register_user.dart';
 import 'package:ppkd_batch_3/Day_25/model/register_model.dart';
 import 'package:ppkd_batch_3/Day_25/views/post_api.dart';
@@ -7,7 +8,7 @@ import 'package:ppkd_batch_3/preference/shared_preference.dart';
 
 class LoginAPIScreen extends StatefulWidget {
   const LoginAPIScreen({super.key});
-  static const id = "/login_api";
+  static const String id = "/login_api";
   @override
   State<LoginAPIScreen> createState() => _LoginAPIScreenState();
 }
@@ -52,6 +53,7 @@ class _LoginAPIScreenState extends State<LoginAPIScreen> {
         context,
       ).showSnackBar(const SnackBar(content: Text("Login berhasil")));
       PreferenceHandler.saveToken(user?.data?.token.toString() ?? "");
+      context.push(Bottom());
       print(user?.toJson());
     } catch (e) {
       print(e);
@@ -96,7 +98,7 @@ class _LoginAPIScreenState extends State<LoginAPIScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
+        padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 180),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -113,7 +115,7 @@ class _LoginAPIScreenState extends State<LoginAPIScreen> {
                     color: Color(0xFF222222),
                   ),
                 ),
-                const SizedBox(height: 15),
+                // const SizedBox(height: 15),
                 const Text(
                   "Login to access your account",
                   style: TextStyle(
@@ -153,27 +155,11 @@ class _LoginAPIScreenState extends State<LoginAPIScreen> {
                         // filled: true,
                         // fillColor: const Color(0xFFFFFFFF),
                       ),
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Email wajib diisi';
-                      //   }
-
-                      //   if (!value.contains("@")) {
-                      //     return "Email Tidak Valid";
-                      //   }
-                      //   return null;
-                      //   //   // if (!RegExp(
-                      //   //   //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                      //   //   // ).hasMatch(value)) {
-                      //   //   //   return 'Format email tidak valid';
-                      //   //   // }
-                      //   //   return null;
-                      // },
                     ),
                   ],
                 ),
 
-                const SizedBox(height: 15),
+                const SizedBox(height: 8),
 
                 // PASSWORD
                 Column(
@@ -188,7 +174,7 @@ class _LoginAPIScreenState extends State<LoginAPIScreen> {
                         color: Color(0xFF888888),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 10),
                     TextFormField(
                       controller: passwordController,
                       obscureText: _isObscure,
@@ -276,7 +262,6 @@ class _LoginAPIScreenState extends State<LoginAPIScreen> {
 
                 const SizedBox(height: 30),
 
-                // Divider dan Google Button
                 const Row(
                   children: [
                     Expanded(child: Divider()),

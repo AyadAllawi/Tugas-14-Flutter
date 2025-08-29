@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
     final userData = await DbHelper.loginUser(email, password);
     if (userData != null) {
       PreferenceHandler.getLogin();
-      context.pushReplacementNamed(BotNav1.id);
+      context.pushReplacementNamed(Bottom.id);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Incorrect email or password")),
@@ -299,7 +299,7 @@ class _LoginState extends State<Login> {
                                 TextButton(
                                   child: Text("DONE"),
                                   onPressed: () {
-                                    context.push(BotNav1());
+                                    context.push(Bottom());
                                   },
                                 ),
                               ],
